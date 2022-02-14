@@ -1,75 +1,56 @@
 <?php
+
+include 'Comparable.php';
 include 'ISport.php';
-include 'comparable.php';
 include 'sport.php';
+include 'Club.php';
 include 'SportRelais.php';
 include 'SportBallon.php';
-include 'Club.php';
 
 echo "<br>Projet Heritage et Interface<br>";
-
-
 // Init les clubs
 $club = array();
-$club[1] = new Club(1, "Club de la honte", 0);
-$club[2] = new Club(2, "FC shinigami", 93);
-$club[3] = new Club(3, "FC Espada", 80);
-$club[4] = new Club(4, "FC Fraude" , 1) ;
+$club[1] = new Club(1, "Dijon", 63);
+$club[2] = new Club(2, "PSG", 67);
+$club[3] = new Club(3, "Nantes", 65);
 
+// Les sports de Dijon
+$sb = new SportBallon("Basketball", 5, 35, 45);
+$club[1]->AjouterSport($sb);
 
-// Les sports du Club de la Honte
-$sport1 = new Sport("Football", 11);
-$sport2 = new Sport("Deltaplane", 4);
-$sportBallon = new SportBallon(nomSport: "Basket", nbJoueurs: 5, largeur: 40, longueur: 50);
-$sportRelais = new SportRelais("Course Poursuite", 2 ,700) ;
-$club[1]->AjouterSport($sport1);
-$club[1]->AjouterSport($sport2);
-$club[1]->AjouterSport($sportBallon);
-$club[1]->AjouterSport($sportRelais);
-
-// Les Sports du FC Shinigami
-$sport1 = new Sport("Football", 11);
-$sport3 = new Sport("Chasse Hollow", 13);
-$sport4 = new Sport("Mission Lester" ,4);
+// Les sports de PSG
+$sport1 = new Sport("Javelot", 1);
+$sport2 = new Sport("Judo", 1);
+$sportBallon1 = new SportBallon("Football", 11, 68, 105);
+$sportBallon2 = new SportBallon("Handball", 7, 35, 65);
+$sportRelais1 = new SportRelais("4 * 100", 400, 4);
 $club[2]->AjouterSport($sport1);
-$club[2]->AjouterSport($sport3);
-$club[2]->AjouterSport($sport4);
+$club[2]->AjouterSport($sport2);
+$club[2]->AjouterSport($sportBallon1);
+$club[2]->AjouterSport($sportBallon2);
+$club[2]->AjouterSport($sportRelais1);
 
-//Les Sport du FC Espada
-$sport1 = new Sport("Football", 11);
-$sport5 = new Sport("Chasse au shinigami", 10);
-$sportRelais1 = new SportRelais("Course Poursuite",2,700);
-$club[3]->AjouterSport($sport1);
-$club[3]->AjouterSport($sport5);
-$club[3]->AjouterSport($sportRelais1);
+// Les sports Nantes
+$sport3 = new Sport("Cyclisme", 1);
+$sportBallon3 = new SportBallon("FootBall", 11, 68, 105);
+$sportBallon4 = new SportBallon("Ruby", 15, 65, 115);
+$sportRelais2 = new SportRelais("100m", 100, 1);
+$club[3]->AjouterSport($sport3);
+$club[3]->AjouterSport($sportBallon3);
+$club[3]->AjouterSport($sportBallon4);
+$club[3]->AjouterSport($sportRelais2);
 
-//Sport du FC fraude
-$sport1 = new Sport("Football", 11);
-$sport6 = new Sport("Royal Rumble", 30);
-$sportBallon = new SportBallon("Basket",5,40,50);
-$club[4]->AjouterSport($sport1);
-$club[4]->AjouterSport($sport6);
-$club[4]->AjouterSport($sportBallon);
-
-foreach($club as $keyclub => $valueclub)
+//Liste des clubs
+foreach ($club as $kClub => $vClub)
 {
-    echo $valueclub->getDescription()."<br>";
+    echo '<a href="index.php?id=' . $vClub->getIdClub() . '">' . $vClub->getNomClub() . '</a><br>';
 }
+//Liste des sports d'un club
+if ($_GET["id"])
 
-$listSport[] = new Sport("Football",11);
-$listSport[] = new Sport("Deltaplane",4);
-$listSport[] = new Sport("Chausse au hollow ",13);
-$listSport[] = new Sport("Chasse au shinigami",10);
-$listSport[] = new SportBallon(nomSport: "Basket",nbJoueurs: 5,largeur: 40,longueur: 50);
-$listSport[] = new Sport("Mission de Lester",4);
-$listSport[] = new SportRelais("Course poursuite",2,700);
-$listSport[] = new Sport("Royal Rumble",30);
-
-echo '<br>LISTE DES CLUBS :'."<br>";
-echo "<a href="."http://localhost:8080/Club-Club-De-La-Honte/%22%3E<br>Club de la Honte"."<br>";
-echo "<a href="."http://localhost:8080/Club-FC-Shinigami/%22%3E<br>FC Shinigami"."<br>";
-echo "<a href="."http://localhost:8080/Club-FC-ESPADA/%22%3E<br>FC ESPADA"."<br>";
-echo "<a href="."http://localhost:8080/Club-FC-FRAUDE/%22%3E<br>FC FRAUDE"."<br>";
-
-
-
+    echo "<br> Club : ".$club[$_GET["id"]]->getNomClub()."<br>";
+    foreach ($club[2]->getLesSports() as $kSport => $vSport){
+    {
+        echo $vSport->getNomSport()."<br>";
+    }
+}
