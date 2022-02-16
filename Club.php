@@ -1,19 +1,22 @@
 <?php
 
-class Club implements comparable
-
+class Club implements Comparable
 {
-    private $idClub;
-    private $nomClub;
-    private $nbPoints;
-    private $lesSports = array();
+    protected $idClub;
+    protected $nomClub;
+    protected $nbPoints;
+    protected $lesSports = [];
 
+    /**
+     * @param $idClub
+     * @param $nomClub
+     * @param $nbPoints
+     */
     public function __construct($idClub, $nomClub, $nbPoints)
     {
-        $this->IdClub = $idClub;
+        $this->idClub = $idClub;
         $this->nomClub = $nomClub;
         $this->nbPoints = $nbPoints;
-
     }
 
     /**
@@ -41,10 +44,9 @@ class Club implements comparable
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-
-    public function getLesSports()
+    public function getLesSports(): array
     {
         return $this->lesSports;
     }
@@ -58,11 +60,4 @@ class Club implements comparable
     {
         // TODO: Implement compareTo() method.
     }
-
-    public function getDescription(): string
-    {
-            return 'Description " Id du club : ' . $this->idClub . " Nom du club : " . $this->nomClub . " Nombre de point : " . $this->nbPoints . "'<br>";
-    }
-
-
 }
